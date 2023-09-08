@@ -1,16 +1,32 @@
 'use client';
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import {
+  Bars3Icon,
+  BellIcon,
+  XMarkIcon,
+  NoSymbolIcon,
+  MoonIcon,
+  ArrowLeftCircleIcon,
+  PlayIcon,
+  CurrencyDollarIcon,
+  ClipboardDocumentCheckIcon,
+  CalendarDaysIcon,
+} from '@heroicons/react/24/outline';
 
 const navigation = [
-  { name: 'Sale', href: '#', current: true },
-  { name: 'Return', href: '#', current: false },
-  { name: 'Invetory', href: '#', current: false },
-  { name: 'Start Day', href: '#', current: false },
-  { name: 'End Day', href: '#', current: false },
+  { name: 'Sale', href: '#', current: true, icon: CurrencyDollarIcon },
+  { name: 'Return', href: '#', current: false, icon: ArrowLeftCircleIcon },
+  {
+    name: 'Inventory',
+    href: '#',
+    current: false,
+    icon: ClipboardDocumentCheckIcon,
+  },
+  { name: 'Start Day', href: '#', current: false, icon: PlayIcon },
+  { name: 'End Day', href: '#', current: false, icon: NoSymbolIcon },
+  { name: 'Today Sale', href: '#', current: false, icon: CalendarDaysIcon },
 ];
-
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
@@ -45,20 +61,25 @@ export default function NavBar() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current
-                            ? 'bg-gray-900 text-white'
-                            : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'rounded-md px-3 py-2 text-sm font-medium',
-                        )}
-                        aria-current={item.current ? 'page' : undefined}
-                      >
-                        {item.name}
-                      </a>
-                    ))}
+                      <div key={item.name} className="group">
+                        <a
+                          href={item.href}
+                          className={classNames(
+                            item.current
+                              ? 'bg-gray-900 text-white'
+                              : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                            'group flex items-center rounded-md px-3 py-2 text-sm font-medium',
+                          )}
+                          aria-current={item.current ? 'page' : undefined}
+                        >
+                          <item.icon
+                            className="h-6 w-6 mr-2 text-gray-300"
+                            aria-hidden="true"
+                          />
+                          {item.name}
+                        </a>
+                      </div>
+                    ))}{' '}
                   </div>
                 </div>
               </div>
