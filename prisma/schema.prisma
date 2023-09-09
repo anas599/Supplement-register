@@ -29,6 +29,7 @@ model Inventory {
   quantity  Int
   expiry    DateTime
   flavor    String
+  picture   String   @default("https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png")
   published Boolean  @default(false)
   author    User     @relation(fields: [authorId], references: [id])
   authorId  Int
