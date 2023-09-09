@@ -3,14 +3,9 @@ import ItemPick from './sellItemPick';
 const Sell = () => {
   return (
     <section>
-      <div className="">
-        <div>
+      <div>
+        <div className="flex">
           <ItemPick />
-          {/* <label htmlFor="choose">Choose from list</label>
-          <select name="choose" id="choose">
-            <option value="1">1</option>
-            <option value="2">2</option>
-          </select> */}
         </div>
         <button
           type="button"
