@@ -16,7 +16,7 @@ export default function Home() {
           <div className="col-span-2 bg-gray-800 p-4 flex flex-wrap overflow-auto h-screen">
             <ItemPick addToInvoice={addToInvoice} />
           </div>
-          <div className="col-span-1 bg-gray-900 p-4 overflow-auto h-screen">
+          <div className="col-span-1 bg-gray-900 p-4 overflow-auto h-screen w-fit">
             <Invoice selectedProducts={selectedProducts} />
           </div>
         </div>
