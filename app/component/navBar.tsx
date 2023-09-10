@@ -15,11 +15,11 @@ import {
 } from '@heroicons/react/24/outline';
 
 const navigation = [
-  { name: 'Sale', href: '#', current: true, icon: CurrencyDollarIcon },
+  { name: 'Sale', href: '/', current: true, icon: CurrencyDollarIcon },
   { name: 'Return', href: '#', current: false, icon: ArrowLeftCircleIcon },
   {
     name: 'Inventory',
-    href: '#',
+    href: '/inventory',
     current: false,
     icon: ClipboardDocumentCheckIcon,
   },
