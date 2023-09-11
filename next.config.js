@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['olimpsport.com', 'upload.wikimedia.org'],
+    domains: [
+      'olimpsport.com',
+      'upload.wikimedia.org',
+      'tailwindui.com',
+      'images.unsplash.com',
+    ],
     remotePatterns: [
       {
         protocol: 'https',
