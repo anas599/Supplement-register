@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import formatDate from '../functions/formatDate';
 const Inventory = () => {
   const [inventory, setInventory] = useState(null);
-  const [selected, setSelected] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -24,12 +23,10 @@ const Inventory = () => {
 
     fetchData();
   }, []);
-  console.log(inventory);
   if (inventory === null) {
     return <div>Loading...</div>;
   }
   return (
-    // <div>hello</div>
     <section>
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
