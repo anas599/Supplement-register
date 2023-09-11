@@ -9,7 +9,6 @@ export default function ItemPick({ product, addToInvoice }: any) {
   const [query, setQuery] = useState('');
   function handleAddToInvoice(item: any) {
     addToInvoice(item);
-    console.log(item);
   }
 
   useEffect(() => {
@@ -20,7 +19,7 @@ export default function ItemPick({ product, addToInvoice }: any) {
         if (res.ok) {
           const data = await res.json();
           setInventory(data);
-          setSelected(data[0]); // Set the selected item here
+          setSelected(data[0]);
         } else {
           console.error('Failed to fetch data');
         }
@@ -65,6 +64,7 @@ export default function ItemPick({ product, addToInvoice }: any) {
           alt="product image"
           width={200}
           height={200}
+          priority={true}
         />
       </a>
       <div className=" px-5 pb-2 flex flex-col ">
