@@ -38,7 +38,8 @@ export default function ItemPick({ product, addToInvoice }: any) {
   const filteredItems =
     query === ''
       ? inventory
-      : inventory.filter((item: any) =>
+      : //@ts-ignore
+        inventory.filter((item: any) =>
           item.name
             .toLowerCase()
             .replace(/\s+/g, '')
