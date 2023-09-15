@@ -13,6 +13,7 @@ import {
   CurrencyDollarIcon,
   ClipboardDocumentCheckIcon,
   CalendarDaysIcon,
+  PlusCircleIcon,
 } from '@heroicons/react/24/outline';
 import formatDate from '../functions/formatDate';
 
@@ -28,6 +29,7 @@ const navigation = [
   { name: 'Start Day', href: '#', current: false, icon: PlayIcon },
   { name: 'End Day', href: '#', current: false, icon: NoSymbolIcon },
   { name: 'Today Sale', href: '#', current: false, icon: CalendarDaysIcon },
+  { name: 'Add Item', href: '/addItem', current: false, icon: PlusCircleIcon },
 ];
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
