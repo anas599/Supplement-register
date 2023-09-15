@@ -9,6 +9,7 @@ const Invoice = ({ selectedProducts }: any) => {
 
   const handleExportPDF = () => {
     if (pdfExportComponent.current) {
+      //@ts-ignore
       pdfExportComponent.current.save();
     }
   };

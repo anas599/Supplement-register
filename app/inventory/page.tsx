@@ -8,7 +8,7 @@ const Inventory = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch('http://localhost:3000/api/inventory');
+        const res = await fetch(`${process.env.DEPLOYDOMAIN}/api/inventory`);
 
         if (res.ok) {
           const data = await res.json();
@@ -55,25 +55,28 @@ const Inventory = () => {
           </tr>
         </thead>
         <tbody>
-          {inventory.map((item: any) => (
-            <tr
-              className="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
-              key={item.id}
-            >
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+          {
+            //@ts-ignore
+            inventory.map((item: any) => (
+              <tr
+                className="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
+                key={item.id}
               >
-                {item.name}
-              </th>
-              <td className="px-6 py-4">{item.size}</td>
-              <td className="px-6 py-4">{item.flavor}</td>
-              <td className="px-6 py-4">${item.price}</td>
-              <td className="px-6 py-4">{item.quantity}</td>
-              <td className="px-6 py-4">{item.brand}</td>
-              <td className="px-6 py-4">{formatDate(item.expiry)}</td>
-            </tr>
-          ))}
+                <th
+                  scope="row"
+                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                >
+                  {item.name}
+                </th>
+                <td className="px-6 py-4">{item.size}</td>
+                <td className="px-6 py-4">{item.flavor}</td>
+                <td className="px-6 py-4">${item.price}</td>
+                <td className="px-6 py-4">{item.quantity}</td>
+                <td className="px-6 py-4">{item.brand}</td>
+                <td className="px-6 py-4">{formatDate(item.expiry)}</td>
+              </tr>
+            ))
+          }
         </tbody>
       </table>
     </section>

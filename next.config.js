@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // output: 'export',
+  env: {
+    DEPLOYDOMAIN: process.env.DEPLOYDOMAIN,
+  },
   images: {
     domains: [
       'olimpsport.com',

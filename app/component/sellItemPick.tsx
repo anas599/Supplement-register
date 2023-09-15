@@ -14,7 +14,7 @@ export default function ItemPick({ product, addToInvoice }: any) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch('http://localhost:3000/api/inventory');
+        const res = await fetch(`${process.env.DEPLOYDOMAIN}/api/inventory`);
 
         if (res.ok) {
           const data = await res.json();
@@ -38,7 +38,8 @@ export default function ItemPick({ product, addToInvoice }: any) {
   const filteredItems =
     query === ''
       ? inventory
-      : inventory.filter((item: any) =>
+      : //@ts-ignore
+        inventory.filter((item: any) =>
           item.name
             .toLowerCase()
             .replace(/\s+/g, '')
