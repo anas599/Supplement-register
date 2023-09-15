@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { formatCurrency } from '../functions/currency';
 import { useGlobalContext } from '../context/store';
+import Loading from './loading';
 export default function ItemPick({ product, addToInvoice }: any) {
   const [inventory, setInventory] = useState(null);
   const [selected, setSelected] = useState(null);
@@ -48,7 +49,7 @@ export default function ItemPick({ product, addToInvoice }: any) {
 
   // Check if inventory is still null and render accordingly
   if (inventory === null) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
   return filteredItems.map((item: any) => (
     <div
