@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <section>
       <div className="grid grid-cols-3 gap-1">
-        <div className="col-span-2 bg-gray-800 p-4 flex flex-wrap overflow-auto h-screen">
+        <div className="col-span-2 bg-gray-800 p-4 flex flex-wrap overflow-auto h-screen justify-center">
           <ItemPick addToInvoice={addToInvoice} />
         </div>
         <div className="col-span-1 bg-gray-900 p-4 overflow-auto h-screen w-auto">
