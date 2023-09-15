@@ -11,13 +11,14 @@
     "dist": "electron-builder",
     "lint": "next lint",
     "package": "electron-forge package",
+    "export": "next export",
     "make": "electron-forge make",
     "electron": "electron ."
   },
   "build": {
     "appId": "supplement-register",
     "directories": {
-      "output": "dist",
+      "output": "dist2",
       "buildResources": "resources"
     },
     "mac": {
