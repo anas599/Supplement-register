@@ -2,6 +2,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import formatDate from '../functions/formatDate';
+import Loading from '../component/loading';
 const Inventory = () => {
   const [inventory, setInventory] = useState(null);
 
@@ -24,10 +25,10 @@ const Inventory = () => {
     fetchData();
   }, []);
   if (inventory === null) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
   return (
-    <section>
+    <section className="flex items-center justify-center content-center">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
