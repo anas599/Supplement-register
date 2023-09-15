@@ -11,8 +11,14 @@ function createWindow() {
     },
   });
 
-  mainWindow.loadURL('http://localhost:3000');
-
+  mainWindow.loadURL(process.env.DEPLOYDOMAIN);
+  mainWindow.loadURL(
+    url.format({
+      pathname: path.join(__dirname, '/out/index.html'),
+      protocol: 'file:',
+      slashes: true,
+    }),
+  );
   mainWindow.on('closed', function () {
     mainWindow = null;
   });
