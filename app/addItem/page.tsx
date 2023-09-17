@@ -14,7 +14,7 @@ const AddForm = () => {
   const [expiryDate, setExpiryDate] = useState('');
   const [picture, setPicture] = useState('');
 
-  const postData = async (event) => {
+  const postData = async (event: any) => {
     event.preventDefault();
 
     const itemData = {
