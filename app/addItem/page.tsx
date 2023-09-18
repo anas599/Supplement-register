@@ -14,12 +14,8 @@ const AddForm = () => {
   const [expiryDate, setExpiryDate] = useState('');
   const [picture, setPicture] = useState('');
 
-  const handelChange = (e) => {
-    console.log(e.target.value);
-  };
-
   const postData = async (event) => {
-    event.preventDefault(); // Prevent page refresh
+    event.preventDefault();
 
     const itemData = {
       name: name,
