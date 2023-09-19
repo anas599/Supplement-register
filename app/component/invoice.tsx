@@ -6,23 +6,41 @@ import { PDFExport } from '@progress/kendo-react-pdf';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { toast, ToastContainer } from 'react-toastify';
+type Product = {
+  id: string;
+  name: string;
+  size: string;
+  flavor: string;
+  price: number;
+};
 
-const Invoice = ({ selectedProducts }) => {
-  const pdfExportComponent = useRef(null);
+const Invoice = ({ selectedProducts }: { selectedProducts: Product[] }) => {
+  const pdfExportComponent = useRef<PDFExport>(null);
 
   const handleExportPDF = async () => {
+    const uniqueItemsMap = new Map();
+    selectedProducts.forEach((item) => {
+      const itemId = item.id;
+      if (uniqueItemsMap.has(itemId)) {
+        uniqueItemsMap.set(itemId, uniqueItemsMap.get(itemId) + 1);
+      } else {
+        uniqueItemsMap.set(itemId, 1);
+      }
+    });
+    if (selectedProducts.length === 0) {
+      toast.error('Please select at least one product to sale', {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: 'dark',
+      });
+      return;
+    }
     if (pdfExportComponent.current) {
       pdfExportComponent.current.save();
-
-      const uniqueItemsMap = new Map();
-      selectedProducts.forEach((item) => {
-        const itemId = item.id;
-        if (uniqueItemsMap.has(itemId)) {
-          uniqueItemsMap.set(itemId, uniqueItemsMap.get(itemId) + 1);
-        } else {
-          uniqueItemsMap.set(itemId, 1);
-        }
-      });
       //-------------kedopdf library end-----------------------------------------
       const uniqueItemsMapArray = Array.from(uniqueItemsMap.entries());
       const response = await fetch('/api/updateAfterSale', {
@@ -116,21 +134,21 @@ const Invoice = ({ selectedProducts }) => {
                         {
                           selectedProducts.find(
                             (item: any) => item.id === itemId,
-                          ).name
+                          )?.name
                         }
                       </td>
                       <td className="pl-6 py-1">
                         {
                           selectedProducts.find(
                             (item: any) => item.id === itemId,
-                          ).size
+                          )?.size
                         }
                       </td>
                       <td className="pl-6 py-1">
                         {
                           selectedProducts.find(
                             (item: any) => item.id === itemId,
-                          ).flavor
+                          )?.flavor
                         }
                       </td>
                       <td className="pl-6 py-1">
@@ -138,7 +156,7 @@ const Invoice = ({ selectedProducts }) => {
                         {
                           selectedProducts.find(
                             (item: any) => item.id === itemId,
-                          ).price
+                          )?.price
                         }
                       </td>
                       <td className="pl-6 py-1">
