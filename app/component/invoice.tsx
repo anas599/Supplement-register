@@ -188,7 +188,7 @@ const Invoice = ({ selectedProducts }: { selectedProducts: Product[] }) => {
               </table>
             </PDFExport>
           </div>
-          <PrintBtn handleExportPDF={handleExportPDF} />
+          <PrintBtn handleExportPDF={handleExportPDF} text={'Print Invoice'} />
         </section>
       </>
     )
