@@ -23,8 +23,16 @@ async function updateAfterSale(req: NextApiRequest, res: NextApiResponse) {
 
       res.json(response);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      if (error instanceof Error) {
+        res.status(500).json(
+          JSON.stringify({
+            error: error.message,
+          }),
+        );
+      }
     }
+  } else {
+    res.status(405).json(JSON.stringify({ error: 'Method not allowed' }));
   }
 }
 
