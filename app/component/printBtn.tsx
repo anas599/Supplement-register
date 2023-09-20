@@ -4,7 +4,7 @@ interface PrintBtnProps {
   text: string;
 }
 
-const PrintBtn: React.FC<PrintBtnProps> = ({ handleExportPDF }, text) => {
+const PrintBtn: React.FC<PrintBtnProps> = ({ handleExportPDF, text }) => {
   return (
     <button
       onClick={handleExportPDF}
