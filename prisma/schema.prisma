@@ -31,6 +31,7 @@ model Inventory {
   flavor    String
   picture   String   @default("https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png")
   published Boolean  @default(false)
+  count     Int      @default(0)
   author    User     @relation(fields: [authorId], references: [id])
   authorId  Int
 }
