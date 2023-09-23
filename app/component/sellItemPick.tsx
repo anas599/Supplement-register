@@ -3,6 +3,10 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import Loading from './loading';
 import AddCartBtnProp from './addCartBtnProp';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { toast, ToastContainer } from 'react-toastify';
+
 export default function ItemPick({ product, addToInvoice }: any) {
   const [inventory, setInventory] = useState(null);
   const [selected, setSelected] = useState(null);
@@ -10,7 +14,18 @@ export default function ItemPick({ product, addToInvoice }: any) {
   function handleAddToInvoice(item: any) {
     addToInvoice(item);
   }
-
+  function handelShowToast() {
+    toast.warn('Item is out of stock!', {
+      position: 'top-center',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'dark',
+    });
+  }
   useEffect(() => {
     async function fetchData() {
       try {
@@ -142,8 +157,20 @@ export default function ItemPick({ product, addToInvoice }: any) {
                 </span>
               </p>
             </div>
+            <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="dark"
+            />
             <AddCartBtnProp
-              onClick={() => handleAddToInvoice(item)}
+              onClick={() => handelShowToast()}
               text={<span style={{ color: 'red' }}>Out of Stock</span>}
             />
           </div>

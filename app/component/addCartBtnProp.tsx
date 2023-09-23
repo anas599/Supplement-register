@@ -1,6 +1,6 @@
 interface AddCartBtnProp {
   onClick: any;
-  text: string;
+  text: any;
 }
 
 function AddToCartButton({ onClick, text }: AddCartBtnProp) {
