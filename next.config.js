@@ -14,6 +14,7 @@ const nextConfig = {
       'upload.wikimedia.org',
       'tailwindui.com',
       'images.unsplash.com',
+      `${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com`,
     ],
     remotePatterns: [
       {
