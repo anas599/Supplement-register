@@ -4,7 +4,8 @@ import { useState } from 'react';
 import dateISO8601 from '../functions/dateiso-8601';
 import InputProp from '../component/inputProp';
 import SubmitBTN from '../component/submitBTN';
-import AWS from 'aws-sdk';
+import { S3Client, PutObjectCommand, S3ClientConfig } from '@aws-sdk/client-s3';
+import { fromEnv } from '@aws-sdk/credential-provider-env';
 import UploadBTN from '../component/UploadBtn';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast, ToastContainer } from 'react-toastify';
@@ -149,17 +150,13 @@ const AddForm = () => {
   const [url, setUrl] = useState<string>('');
   // Function to upload file to s3
   const uploadFile = async () => {
-    AWS.config.update({
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-    });
-    const s3 = new AWS.S3({
-      params: { Bucket: process.env.AWS_BUCKET_NAME! },
+    const s3 = new S3Client({
       region: process.env.AWS_REGION!,
+      credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+      },
     });
-
-    // Files Parameters
-
     const params = {
       Bucket: process.env.AWS_BUCKET_NAME!,
       Key: file?.name,
@@ -167,16 +164,18 @@ const AddForm = () => {
       Body: file?.body,
     };
     // Uploading file to s3
-    var upload = s3
-      .putObject(params)
-      .on('httpUploadProgress', (evt) => {
-        console.log(
-          'Uploading ' +
-            parseInt(((evt.loaded * 100) / evt.total).toString()) +
-            '%',
-        );
-      })
-      .promise();
+    var upload = s3.send(new PutObjectCommand(params));
+
+    // var upload = s3
+    //   .putObject(params)
+    //   .on('httpUploadProgress', (evt) => {
+    //     console.log(
+    //       'Uploading ' +
+    //         parseInt(((evt.loaded * 100) / evt.total).toString()) +
+    //         '%',
+    //     );
+    //   })
+    //   .promise();
     const trimmedName = file?.name.replace(' ', '+');
     await upload
       .then((data: AWS.S3.PutObjectOutput) => {
