@@ -1,7 +1,21 @@
 'use client';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import dateISO8601 from '../functions/dateiso-8601';
 import InputProp from '../component/inputProp';
+import SubmitBTN from '../component/submitBTN';
+import AWS from 'aws-sdk';
+import UploadBTN from '../component/UploadBtn';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { toast, ToastContainer } from 'react-toastify';
+
+// import UploadS3 from '../aws/page';
+interface File {
+  name: string;
+  body: any;
+}
+
 const AddForm = () => {
   const [name, setName] = useState('');
   const [brand, setBrand] = useState('');
@@ -12,6 +26,7 @@ const AddForm = () => {
   const [expiryDate, setExpiryDate] = useState('');
   const [picture, setPicture] = useState('');
 
+  const [imageURL, setImageURL] = useState('');
   const postData = async (event: any) => {
     event.preventDefault();
 
@@ -23,7 +38,7 @@ const AddForm = () => {
       quantity: parseInt(quantity),
       flavor: flavor,
       expiry: dateISO8601(expiryDate),
-      // picture: 'picture',
+      picture: url,
       author: 1, // assuming the author is a user with id 1
     };
 
@@ -38,6 +53,18 @@ const AddForm = () => {
           body: JSON.stringify(itemData),
         },
       );
+      if (response.ok) {
+        toast.success('Item added successfully to the inventory! ', {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'dark',
+        });
+      }
       const bodyText = await response.text();
       try {
         const json = JSON.parse(bodyText);
@@ -52,6 +79,7 @@ const AddForm = () => {
       console.error('An error occurred while posting', e);
     }
   };
+
   const dataArray = [
     {
       name: 'name',
@@ -109,25 +137,98 @@ const AddForm = () => {
       type: 'date',
       required: true,
     },
-    {
-      name: 'picture',
-      value: picture,
-      label: 'Picture',
-      onChange: (e: any) => setPicture(e.target.value),
-      type: 'file',
-      required: false,
-    },
+    // {
+    //   name: 'picture',
+    //   value: imageURL,
+    //   label: 'Picture',
+    //   onChange: (handleFileChange),
+    //   type: 'file',
+    //   required: false,
+    // },
   ];
+  // S3 upload
+  const [file, setFile] = useState<File | null>(null);
+  const [url, setUrl] = useState<string>('');
+  // Function to upload file to s3
+  const uploadFile = async () => {
+    AWS.config.update({
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+    });
+    const s3 = new AWS.S3({
+      params: { Bucket: process.env.AWS_BUCKET_NAME! },
+      region: process.env.AWS_REGION!,
+    });
+
+    // Files Parameters
+
+    const params = {
+      Bucket: process.env.AWS_BUCKET_NAME!,
+      Key: file?.name,
+
+      Body: file?.body,
+    };
+    // Uploading file to s3
+    var upload = s3
+      .putObject(params)
+      .on('httpUploadProgress', (evt) => {
+        console.log(
+          'Uploading ' +
+            parseInt(((evt.loaded * 100) / evt.total).toString()) +
+            '%',
+        );
+      })
+      .promise();
+    const trimmedName = file?.name.replace(' ', '+');
+    await upload
+      .then((data: AWS.S3.PutObjectOutput) => {
+        setUrl(
+          `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${trimmedName}`,
+        );
+        console.log(`File uploaded successfully at ${url}`);
+
+        toast.success('File uploaded successfully.', {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: 'dark',
+        });
+      })
+      .catch((err: AWS.AWSError) => {
+        console.log(err);
+        alert('Error uploading file.');
+      });
+  };
+  // Function to handle file and store it to file state
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files![0];
+    setFile({ name: file.name, body: file });
+  };
+  // s3 upload end
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div>update quantity</div>
-
       <form onSubmit={postData}>
         {dataArray.map((item) => (
           <InputProp
             key={item.name}
             label={item.label}
-            type="text"
+            type={item.type}
             id={item.name}
             placeholder={item.label}
             value={item.value}
@@ -135,15 +236,23 @@ const AddForm = () => {
             required={item.required}
           />
         ))}
-        <button
-          type="submit"
-          className="relative inline-flex items-center justify-center p-0.5 m-4 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
-        >
-          <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-            Add Item
-          </span>
-        </button>
+        {imageURL ? (
+          <Image src={imageURL} alt="Uploaded Image" width={200} height={200} />
+        ) : (
+          <InputProp
+            label="Picture"
+            type="file"
+            id="picture"
+            placeholder="picture"
+            onChange={handleFileChange}
+            required={false}
+          />
+        )}
+
+        <UploadBTN onClick={uploadFile} text="Upload Image" />
+        <SubmitBTN />
       </form>
+      {/* <button onClick={uploadFile}>Upload</button> */}
     </>
   );
 };
