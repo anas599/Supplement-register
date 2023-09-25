@@ -1,5 +1,6 @@
 'use client';
 import AWS from 'aws-sdk';
+import { url } from 'inspector';
 import { useState } from 'react';
 interface File {
   name: string;
@@ -8,7 +9,7 @@ interface File {
 
 function UploadS3() {
   const [file, setFile] = useState<File | null>(null);
-
+  const [url, setUrl] = useState<string>('');
   // Function to upload file to s3
   const uploadFile = async () => {
     AWS.config.update({
@@ -39,10 +40,12 @@ function UploadS3() {
         );
       })
       .promise();
-
+    const trimmedName = file?.name.replace(' ', '+');
     await upload
       .then((data: AWS.S3.PutObjectOutput) => {
-        const url = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${file.name}`;
+        setUrl(
+          `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${trimmedName}`,
+        );
         console.log(`File uploaded successfully at ${url}`);
 
         alert('File uploaded successfully.');
@@ -55,7 +58,6 @@ function UploadS3() {
   // Function to handle file and store it to file state
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
-    // Changing file state
     setFile({ name: file.name, body: file });
   };
   return (
@@ -63,6 +65,7 @@ function UploadS3() {
       <div>
         <input type="file" onChange={handleFileChange} />
         <button onClick={uploadFile}>Upload</button>
+        <input type="text" value={url} className="text-red-700" />
       </div>
     </div>
   );
