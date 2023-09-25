@@ -1,16 +1,14 @@
 'use client';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import dateISO8601 from '../functions/dateiso-8601';
 import InputProp from '../component/inputProp';
 import SubmitBTN from '../component/submitBTN';
 import AWS from 'aws-sdk';
 import UploadBTN from '../component/UploadBtn';
 import 'react-toastify/dist/ReactToastify.css';
-
 import { toast, ToastContainer } from 'react-toastify';
 
-// import UploadS3 from '../aws/page';
 interface File {
   name: string;
   body: any;
@@ -222,7 +220,6 @@ const AddForm = () => {
         pauseOnHover
         theme="dark"
       />
-      <div>update quantity</div>
       <form onSubmit={postData}>
         {dataArray.map((item) => (
           <InputProp
@@ -252,7 +249,6 @@ const AddForm = () => {
         <UploadBTN onClick={uploadFile} text="Upload Image" />
         <SubmitBTN />
       </form>
-      {/* <button onClick={uploadFile}>Upload</button> */}
     </>
   );
 };
