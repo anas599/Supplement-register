@@ -10,6 +10,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>
+        <title>Supplements Register (POS)</title>
         <NavBar />
         <GlobalContextProvider>{children}</GlobalContextProvider>
       </body>
