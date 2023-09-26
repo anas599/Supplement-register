@@ -1,7 +1,8 @@
 'use client';
+import SkeletonProductList from '@/app/component/Loading/skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import Loading from './loading';
 import AddCartBtnProp from './addCartBtnProp';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -61,9 +62,8 @@ export default function ItemPick({ product, addToInvoice }: any) {
             .includes(query.toLowerCase().replace(/\s+/g, '')),
         );
 
-  // Check if inventory is still null and render accordingly
   if (inventory === null) {
-    return <Loading />;
+    return <SkeletonProductList />;
   }
   return filteredItems.map((item: any) => (
     <section key={item.name}>
