@@ -1,4 +1,4 @@
-function removeItemById(array, id) {
-  return array.filter((item) => item.id !== id);
+function removeItemById(array: any, id: any) {
+  return array.filter((item: { id: any }) => item.id !== id);
 }
 export default removeItemById;
