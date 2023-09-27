@@ -25,9 +25,9 @@ function UploadS3() {
 
     const params = {
       Bucket: process.env.AWS_BUCKET_NAME!,
-      Key: file?.name,
+      Key: file?.name!,
 
-      Body: file?.body,
+      Body: file?.body!,
     };
     // Uploading file to s3
     var upload = s3
@@ -46,7 +46,7 @@ function UploadS3() {
         setUrl(
           `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${trimmedName}`,
         );
-        console.log(`File uploaded successfully at ${url}`);
+        // console.log(`File uploaded successfully at ${url}`);
 
         alert('File uploaded successfully.');
       })

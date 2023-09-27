@@ -88,13 +88,14 @@ const Invoice = ({ selectedProducts }: { selectedProducts: Product[] }) => {
   }, [selectedProducts]);
   const [items, setItems] = useState<Product[]>([]);
   const increaseCount = (id: string) => {
-    const newCount = uniqueItemsMap.get(id) + 1;
+    const newCount = uniqueItemsMap.get(id)! + 1;
     setUniqueItemsMap(new Map(uniqueItemsMap.set(id, newCount)));
   };
 
   const decreaseCount = (id: string) => {
-    const newCount = uniqueItemsMap.get(id) - 1;
-    if (newCount >= 0) {
+    const currentCount = uniqueItemsMap.get(id);
+    if (currentCount !== undefined && currentCount > 0) {
+      const newCount = currentCount - 1;
       setUniqueItemsMap(new Map(uniqueItemsMap.set(id, newCount)));
     }
   };
