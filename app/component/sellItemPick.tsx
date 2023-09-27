@@ -4,6 +4,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import AddCartBtnProp from './addCartBtnProp';
+import { motion } from 'framer-motion';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { toast, ToastContainer } from 'react-toastify';
@@ -68,7 +69,16 @@ export default function ItemPick({ product, addToInvoice }: any) {
   return filteredItems.map((item: any) => (
     <section key={item.name}>
       {item.quantity > 0 ? (
-        <div className="max-h-full relative m-2 flex w-full max-w-fit flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            duration: 1.2,
+            delay: 0.1,
+            ease: [0, 0.71, 0.2, 1.01],
+          }}
+          className="max-h-full relative m-2 flex w-full max-w-fit flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md"
+        >
           <a
             className="relative flex justify-center overflow-hidden rounded-xl"
             href="#"
@@ -110,9 +120,18 @@ export default function ItemPick({ product, addToInvoice }: any) {
               text={'Add to Invoice'}
             />
           </div>
-        </div>
+        </motion.div>
       ) : (
-        <div className="max-h-full relative m-2 flex w-full max-w-fit flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            duration: 1.2,
+            delay: 0.1,
+            ease: [0, 0.71, 0.2, 1.01],
+          }}
+          className="max-h-full relative m-2 flex w-full max-w-fit flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md"
+        >
           <a
             className="relative flex justify-center overflow-hidden rounded-xl"
             href="#"
@@ -174,7 +193,7 @@ export default function ItemPick({ product, addToInvoice }: any) {
               text={<span style={{ color: 'red' }}>Out of Stock</span>}
             />
           </div>
-        </div>
+        </motion.div>
       )}
     </section>
   ));
