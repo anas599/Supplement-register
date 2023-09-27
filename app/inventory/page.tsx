@@ -3,6 +3,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import formatDate from '../functions/formatDate';
 import SkeletonTable from '../component/Loading/skeltonTable';
+import { motion } from 'framer-motion';
 const Inventory = () => {
   const [inventory, setInventory] = useState(null);
 
@@ -31,7 +32,15 @@ const Inventory = () => {
     <section className="flex items-center justify-center content-center">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
+          <motion.tr
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              duration: 1.2,
+              delay: 0.1,
+              ease: [0, 0.71, 0.2, 1.01],
+            }}
+          >
             <th scope="col" className="px-6 py-3">
               Product name
             </th>
@@ -53,37 +62,62 @@ const Inventory = () => {
             <th scope="col" className="px-6 py-3">
               Expire Date
             </th>
-          </tr>
+          </motion.tr>
         </thead>
-        <tbody>
+        <motion.tbody
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            duration: 1.2,
+            delay: 0.1,
+            ease: [0, 0.71, 0.2, 1.01],
+          }}
+        >
           {
             //@ts-ignore
             inventory.map((item: any) => (
-              <tr
+              <motion.tr
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 className="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
                 key={item.id}
               >
-                <th
+                <motion.th
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{
+                    duration: 1.2,
+                    delay: 0.1,
+                    ease: [0, 0.71, 0.2, 1.01],
+                  }}
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
                   {item.name}
-                </th>
-                <td className="px-6 py-4">{item.size}</td>
-                <td className="px-6 py-4">{item.flavor}</td>
-                <td className="px-6 py-4">${item.price}</td>
-                <td
+                </motion.th>
+                <motion.td
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="px-6 py-4"
+                >
+                  {item.size}
+                </motion.td>
+                <motion.td className="px-6 py-4">{item.flavor}</motion.td>
+                <motion.td className="px-6 py-4">${item.price}</motion.td>
+                <motion.td
                   className="px-6 py-4"
                   style={{ color: item.quantity === 0 ? 'red' : 'inherit' }}
                 >
                   {item.quantity === 0 ? 'Out of Stock' : item.quantity}
-                </td>
+                </motion.td>
                 <td className="px-6 py-4">{item.brand}</td>
                 <td className="px-6 py-4">{formatDate(item.expiry)}</td>
-              </tr>
+              </motion.tr>
             ))
           }
-        </tbody>
+        </motion.tbody>
       </table>
     </section>
   );
