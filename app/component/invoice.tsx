@@ -3,7 +3,7 @@ import PrintBtn from './printBtn';
 import { PDFExport } from '@progress/kendo-react-pdf';
 import 'react-toastify/dist/ReactToastify.css';
 import removeItemById from '../functions/removeItem';
-import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 import { toast, ToastContainer } from 'react-toastify';
 type Product = {
@@ -125,7 +125,16 @@ const Invoice = ({ selectedProducts }: { selectedProducts: Product[] }) => {
         pauseOnHover
         theme="dark"
       />
-      <section className="invoice flex flex-col items-center justify-center">
+      <motion.section
+        className="invoice flex flex-col items-center justify-center"
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          duration: 1.2,
+          delay: 0.1,
+          ease: [0, 0.71, 0.2, 1.01],
+        }}
+      >
         <h2 className="text-center pb-1 mb-1">Invoice</h2>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <PDFExport ref={pdfExportComponent} paperSize="A2">
@@ -305,7 +314,7 @@ const Invoice = ({ selectedProducts }: { selectedProducts: Product[] }) => {
           </PDFExport>
         </div>
         <PrintBtn handleExportPDF={handleExportPDF} text={'Print Invoice'} />
-      </section>
+      </motion.section>
     </>
   );
 };
