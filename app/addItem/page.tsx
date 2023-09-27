@@ -4,8 +4,7 @@ import { useState } from 'react';
 import dateISO8601 from '../functions/dateiso-8601';
 import InputProp from '../component/inputProp';
 import SubmitBTN from '../component/submitBTN';
-import { S3Client, PutObjectCommand, S3ClientConfig } from '@aws-sdk/client-s3';
-import { fromEnv } from '@aws-sdk/credential-provider-env';
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import UploadBTN from '../component/UploadBtn';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast, ToastContainer } from 'react-toastify';
@@ -23,8 +22,6 @@ const AddForm = () => {
   const [quantity, setQuantity] = useState('');
   const [flavor, setFlavor] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
-  const [picture, setPicture] = useState('');
-
   const [imageURL, setImageURL] = useState('');
   const postData = async (event: any) => {
     event.preventDefault();
@@ -166,16 +163,6 @@ const AddForm = () => {
     // Uploading file to s3
     var upload = s3.send(new PutObjectCommand(params));
 
-    // var upload = s3
-    //   .putObject(params)
-    //   .on('httpUploadProgress', (evt) => {
-    //     console.log(
-    //       'Uploading ' +
-    //         parseInt(((evt.loaded * 100) / evt.total).toString()) +
-    //         '%',
-    //     );
-    //   })
-    //   .promise();
     const trimmedName = file?.name.replace(' ', '+');
     await upload
       .then((data: AWS.S3.PutObjectOutput) => {
