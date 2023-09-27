@@ -2,7 +2,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import formatDate from '../functions/formatDate';
-import Loading from '../component/loading';
+import SkeletonTable from '../component/Loading/skeltonTable';
 const Inventory = () => {
   const [inventory, setInventory] = useState(null);
 
@@ -25,7 +25,7 @@ const Inventory = () => {
     fetchData();
   }, []);
   if (inventory === null) {
-    return <Loading />;
+    return <SkeletonTable />;
   }
   return (
     <section className="flex items-center justify-center content-center">
@@ -72,7 +72,12 @@ const Inventory = () => {
                 <td className="px-6 py-4">{item.size}</td>
                 <td className="px-6 py-4">{item.flavor}</td>
                 <td className="px-6 py-4">${item.price}</td>
-                <td className="px-6 py-4">{item.quantity}</td>
+                <td
+                  className="px-6 py-4"
+                  style={{ color: item.quantity === 0 ? 'red' : 'inherit' }}
+                >
+                  {item.quantity === 0 ? 'Out of Stock' : item.quantity}
+                </td>
                 <td className="px-6 py-4">{item.brand}</td>
                 <td className="px-6 py-4">{formatDate(item.expiry)}</td>
               </tr>
