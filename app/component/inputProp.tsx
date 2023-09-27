@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 interface TextInputProps {
   label: string;
   type: string;
@@ -18,7 +19,16 @@ const InputProp: React.FC<TextInputProps> = ({
   onChange,
 }) => {
   return (
-    <div className="m-6 mx-10">
+    <motion.div
+      className="m-6 mx-10"
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{
+        duration: 1.2,
+        delay: 0.1,
+        ease: [0, 0.71, 0.2, 1.01],
+      }}
+    >
       <label
         htmlFor={id}
         className=" mb-1 text-sm font-medium text-gray-200 hidden"
@@ -34,7 +44,7 @@ const InputProp: React.FC<TextInputProps> = ({
         placeholder={placeholder}
         required={required}
       />
-    </div>
+    </motion.div>
   );
 };
 
