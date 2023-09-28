@@ -3,7 +3,7 @@ import Skeleton from '@mui/material/Skeleton';
 
 const SkeletonProductCard = () => {
   return (
-    <div className="pt-1 max-h-full relative m-2 flex w-full max-w-fit flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
+    <div className="pt-1 max-h-full relative m-2 flex w-full max-w-fit justify-between flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
       <a
         className="relative flex justify-center overflow-hidden rounded-xl"
         href="#"
