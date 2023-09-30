@@ -1,9 +1,8 @@
 'use client';
-import React from 'react';
-import { useEffect, useState } from 'react';
-import formatDate from '../functions/formatDate';
-import SkeletonTable from '../component/Loading/skeltonTable';
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import SkeletonTable from '../component/Loading/skeltonTable';
+import formatDate from '../functions/formatDate';
 const Inventory = () => {
   const [inventory, setInventory] = useState(null);
 
