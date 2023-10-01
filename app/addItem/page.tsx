@@ -232,7 +232,11 @@ const AddForm = () => {
           />
         )}
 
-        <UploadBTN onClick={uploadFile} text="Upload Image" />
+        <UploadBTN
+          onClick={uploadFile}
+          text="Upload Image"
+          disabled={file === null}
+        />
         <SubmitBTN />
       </form>
     </>

@@ -1,11 +1,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+
 interface UploadBtnProps {
   onClick: any;
   text: string;
+  disabled?: boolean;
+  disabledClassName?: string;
 }
 
-const UploadBTN: React.FC<UploadBtnProps> = ({ onClick, text }) => {
+const UploadBTN: React.FC<UploadBtnProps> = ({
+  onClick,
+  text,
+  disabled,
+  disabledClassName,
+}) => {
   return (
     <motion.button
       initial={{ opacity: 0, scale: 0.5 }}
@@ -17,7 +25,10 @@ const UploadBTN: React.FC<UploadBtnProps> = ({ onClick, text }) => {
       }}
       type="button"
       onClick={onClick}
-      className="m-6 mx-10 relative inline-flex items-center justify-center p-0.5  overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
+      disabled={disabled}
+      className={`m-6 mx-10 relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 ${
+        disabled ? 'opacity-50 cursor-not-allowed' : ''
+      } ${disabledClassName}`}
     >
       <span className="relative flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
         <svg
@@ -26,7 +37,7 @@ const UploadBTN: React.FC<UploadBtnProps> = ({ onClick, text }) => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6 mr-2" // Added margin-right to separate the icon from the text
+          className="w-6 h-6 mr-2"
         >
           <path
             strokeLinecap="round"
