@@ -4,6 +4,7 @@ import { PDFExport } from '@progress/kendo-react-pdf';
 import 'react-toastify/dist/ReactToastify.css';
 import removeItemById from '../functions/removeItem';
 import { motion } from 'framer-motion';
+import '../toastify-custom.css';
 
 import { toast, ToastContainer } from 'react-toastify';
 type Product = {
