@@ -162,13 +162,14 @@ const AddForm = () => {
     };
     // Uploading file to s3
     var upload = s3.send(new PutObjectCommand(params));
-
+    //critical part of uploading to s3 depends on the name of the CORS configuration start
     const trimmedName = file?.name.replace(' ', '+');
     await upload
       .then((data: AWS.S3.PutObjectOutput) => {
         setUrl(
           `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${trimmedName}`,
         );
+        //critical part end check in Firefox if CORS fails
         console.log(`File uploaded successfully at ${url}`);
 
         toast.success('File uploaded successfully.', {
