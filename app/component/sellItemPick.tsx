@@ -31,7 +31,7 @@ export default function ItemPick({ product, addToInvoice }: any) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch(`${process.env.DEPLOYDOMAIN}/api/inventory1`);
+        const res = await fetch(`${process.env.DEPLOYDOMAIN}/api/inventory`);
 
         if (res.ok) {
           const data = await res.json();
@@ -64,15 +64,8 @@ export default function ItemPick({ product, addToInvoice }: any) {
         );
 
   if (inventory === null) {
-    console.log(process.env.DEPLOYDOMAIN);
-    console.log(process.env.DATABASE_URL);
-    console.log(process.env.ACCESS_KEY_ID);
-
     return <SkeletonProductList />;
   }
-  console.log(process.env.DEPLOYDOMAIN);
-  console.log(process.env.DATABASE_URL);
-  console.log(process.env.ACCESS_KEY_ID);
   return filteredItems.map((item: any) => (
     <section key={item.name}>
       {item.quantity > 0 ? (
