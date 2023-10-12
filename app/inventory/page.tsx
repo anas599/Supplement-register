@@ -15,7 +15,7 @@ const Inventory = () => {
           const data = await res.json();
           setInventory(data);
         } else {
-          console.error('Failed to fetch data:', res.status);
+          console.error('Failed to fetch data:', res.status, res.statusText);
         }
       } catch (error) {
         console.error('Error fetching data:', error);

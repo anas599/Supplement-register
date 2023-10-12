@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "electron-forge start",
+    "start": "next start",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "lint": "next lint",
