@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE `Inventory` ADD COLUMN `count` INTEGER NOT NULL DEFAULT 0;
