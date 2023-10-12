@@ -9,13 +9,13 @@ const Inventory = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch(`${process.env.DEPLOYDOMAIN}/api/inventory`);
+        const res = await fetch(`${process.env.DEPLOYDOMAIN}/api/inventory1`);
 
         if (res.ok) {
           const data = await res.json();
           setInventory(data);
         } else {
-          console.error('Failed to fetch data');
+          console.error('Failed to fetch data:', res.status);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
