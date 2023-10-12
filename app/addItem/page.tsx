@@ -1,4 +1,6 @@
 'use client';
+import * as AWS from 'aws-sdk';
+
 import Image from 'next/image';
 import { useState } from 'react';
 import dateISO8601 from '../functions/dateiso-8601';
