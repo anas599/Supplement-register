@@ -66,6 +66,9 @@ export default function ItemPick({ product, addToInvoice }: any) {
   if (inventory === null) {
     return <SkeletonProductList />;
   }
+  console.log(process.env.DEPLOYDOMAIN);
+  console.log(process.env.DATABASE_URL);
+  console.log(process.env.ACCESS_KEY_ID);
   return filteredItems.map((item: any) => (
     <section key={item.name}>
       {item.quantity > 0 ? (
