@@ -150,14 +150,14 @@ const AddForm = () => {
   // Function to upload file to s3
   const uploadFile = async () => {
     const s3 = new S3Client({
-      region: process.env.AWS_REGION!,
+      region: process.env.REGION!,
       credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+        accessKeyId: process.env.ACCESS_KEY_ID!,
+        secretAccessKey: process.env.SECRET_ACCESS_KEY!,
       },
     });
     const params = {
-      Bucket: process.env.AWS_BUCKET_NAME!,
+      Bucket: process.env.BUCKET_NAME!,
       Key: file?.name,
 
       Body: file?.body,
@@ -169,7 +169,7 @@ const AddForm = () => {
     await upload
       .then((data: AWS.S3.PutObjectOutput) => {
         setUrl(
-          `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${trimmedName}`,
+          `https://${process.env.BUCKET_NAME}.s3.${process.env.REGION}.amazonaws.com/${trimmedName}`,
         );
         //critical part end check in Firefox if CORS fails
         console.log(`File uploaded successfully at ${url}`);

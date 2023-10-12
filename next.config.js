@@ -3,10 +3,11 @@ const nextConfig = {
   // output: 'export',
   env: {
     DEPLOYDOMAIN: process.env.DEPLOYDOMAIN,
-    AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
-    AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
-    AWS_REGION: process.env.AWS_REGION,
-    AWS_BUCKET_NAME: process.env.AWS_BUCKET_NAME,
+    DATABASE_URL: process.env.DATABASE_URL,
+    ACCESS_KEY_ID: process.env.ACCESS_KEY_ID,
+    SECRET_ACCESS_KEY: process.env.SECRET_ACCESS_KEY,
+    REGION: process.env.REGION,
+    BUCKET_NAME: process.env.BUCKET_NAME,
   },
   images: {
     domains: [
@@ -14,7 +15,7 @@ const nextConfig = {
       'upload.wikimedia.org',
       'tailwindui.com',
       'images.unsplash.com',
-      `${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com`,
+      `${process.env.BUCKET_NAME}.s3.${process.env.REGION}.amazonaws.com`,
     ],
     remotePatterns: [
       {
