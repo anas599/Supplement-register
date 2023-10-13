@@ -1,0 +1,97 @@
+{
+  "name": "supplement-register",
+  "version": "0.1.0",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "lint": "next lint",
+    "package": "electron-forge package",
+    "export": "next export",
+    "make": "electron-forge make",
+    "electron": "electron ."
+  },
+  "build": {
+    "appId": "supplement-register",
+    "directories": {
+      "output": "dist2",
+      "buildResources": "resources"
+    },
+    "mac": {
+      "category": "public.app-category.developer-tools"
+    },
+    "win": {
+      "target": "nsis"
+    }
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.418.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
+    "@mui/material": "^5.14.11",
+    "@prisma/client": "^5.2.0",
+    "@progress/kendo-licensing": "^1.3.1",
+    "@progress/kendo-react-pdf": "^5.17.0",
+    "@react-pdf/renderer": "^3.1.12",
+    "@types/node": "20.5.9",
+    "@types/react": "18.2.21",
+    "@types/react-dom": "18.2.7",
+    "autoprefixer": "10.4.15",
+    "aws-crt": "^1.18.0",
+    "aws-sdk": "^2.1463.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "date-fns": "^2.30.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "eslint": "8.48.0",
+    "eslint-config-next": "^13.5.4",
+    "formidable": "^3.5.1",
+    "framer-motion": "^10.16.4",
+    "lucide-react": "^0.279.0",
+    "next": "^13.4.8",
+    "postcss": "8.4.29",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-loading-skeleton": "^3.3.1",
+    "react-toastify": "^9.1.3",
+    "tailwind-merge": "^1.14.0",
+    "tailwindcss": "3.3.3",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "5.2.2"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.4.2",
+    "@electron-forge/maker-deb": "^6.4.2",
+    "@electron-forge/maker-rpm": "^6.4.2",
+    "@electron-forge/maker-squirrel": "^6.4.2",
+    "@electron-forge/maker-zip": "^6.4.2",
+    "@electron-forge/plugin-auto-unpack-natives": "^6.4.2",
+    "@types/formidable": "^3.4.3",
+    "electron": "^26.2.0",
+    "electron-builder": "^24.6.4",
+    "prisma": "^5.2.0"
+  },
+  "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anas599/Supplement-register.git"
+  },
+  "keywords": [
+    "electron",
+    "nextjs13",
+    "tailwind",
+    "mysql"
+  ],
+  "author": "Anas Al-Sammarraie",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anas599/Supplement-register/issues"
+  },
+  "homepage": "https://github.com/anas599/Supplement-register#readme"
+}
