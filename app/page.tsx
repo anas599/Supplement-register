@@ -2,7 +2,6 @@
 import Invoice from './component/invoice';
 import ItemPick from './component/sellItemPick';
 import { useGlobalContext } from './context/store';
-export const runtime = 'edge';
 export default function Home() {
   const { selectedProducts, setSelectedProducts } = useGlobalContext();
   const addToInvoice = (product: any) => {
