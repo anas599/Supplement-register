@@ -41,16 +41,13 @@ const AddForm = () => {
     };
 
     try {
-      const response = await fetch(
-        `${process.env.DEPLOYDOMAIN}/api/inventory`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(itemData),
+      const response = await fetch(`${process.env.DEPLOYDOMAIN}/api/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      );
+        body: JSON.stringify(itemData),
+      });
       if (response.ok) {
         toast.success('Item added successfully to the inventory! ', {
           position: 'top-center',
