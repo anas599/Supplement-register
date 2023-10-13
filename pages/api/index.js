@@ -55,19 +55,12 @@
 //   }
 // }
 // export default handler;
-import type { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '@/lib/prisma';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+async function handler(req, res) {
   if (req.method === 'GET') {
-    try {
-      const inv = await prisma.inventory.findMany({});
-      res.json(inv);
-    } catch (err) {
-      res.status(500).json({ error: 'Something went wrong' });
-    }
+    const oneComment = await prisma.inventory.findMany({});
+    res.status(200).json(oneComment);
   }
 }
+export default handler;
