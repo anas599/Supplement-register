@@ -112,7 +112,7 @@ const Invoice = ({ selectedProducts }: { selectedProducts: Product[] }) => {
   );
 
   // ---------
-  console.log('selectedProducts', uniqueItemsMap);
+
   return (
     <>
       <ToastContainer

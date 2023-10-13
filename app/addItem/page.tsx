@@ -63,7 +63,6 @@ const AddForm = () => {
       const bodyText = await response.text();
       try {
         const json = JSON.parse(bodyText);
-        console.log(json);
       } catch (error) {
         console.error(
           'Received the following instead of valid JSON:',
