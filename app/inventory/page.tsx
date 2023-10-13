@@ -9,7 +9,7 @@ const Inventory = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch(`${process.env.DEPLOYDOMAIN}/api/inventory`);
+        const res = await fetch(`${process.env.DEPLOYDOMAIN}/api/`);
 
         if (res.ok) {
           const data = await res.json();
