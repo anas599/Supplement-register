@@ -1,13 +1,20 @@
 import { prisma } from '@/lib/prisma';
-export default async function handle(req: any, res: any) {
+
+async function handler(req: any, res: any) {
   if (req.method === 'GET') {
-    const inv = await prisma.inventory.findMany({});
-    const user1 = await prisma.user.findFirst({
-      where: {
-        id: 1,
-      },
-    });
-    res.json(inv);
+    try {
+      const inv = await prisma.inventory.findMany({});
+      res.json(inv);
+    } catch (err) {
+      res.status(500).json({ error: 'Something went wrong' });
+    }
+    // const inv = await prisma.inventory.findMany({});
+    // const user1 = await prisma.user.findFirst({
+    //   where: {
+    //     id: 1,
+    //   },
+    // });
+    // res.json(inv);
   }
   if (req.method === 'POST') {
     const {
@@ -52,3 +59,4 @@ export default async function handle(req: any, res: any) {
     res.json(inv);
   }
 }
+export default handler;
