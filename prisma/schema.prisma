@@ -42,3 +42,13 @@ model Profile {
   user   User    @relation(fields: [userId], references: [id])
   userId Int     @unique
 }
+
+model Insta {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String   @db.VarChar(255)
+  count     Int      @default(0)
+  serivces  String
+  password  String
+}
