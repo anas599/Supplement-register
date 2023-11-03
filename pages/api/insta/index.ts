@@ -10,5 +10,19 @@ async function handler(req: any, res: any) {
       res.status(500).json({ error: 'Something went wrong' });
     }
   }
+
+  if(req.method === 'POST'){
+    try {
+      const {count} = req.body;
+      const inv = await prisma.insta.update({
+        where: {id: 1},
+        data: {count: count}
+      });
+      res.json(inv);
+    } catch (err) {
+      res.status(500).json({ error: 'Something went wrong' });
+    }
+  }
+
 }
 export default handler;
