@@ -12,7 +12,7 @@ async function handler(req: any, res: any) {
 
 if(req.method === 'POST'){
     try {
-      const {count} = req.query;
+      const {count} = req.body;
       const inv = await prisma.insta.update({
         where: {id: 1},
         data: {count: count}
