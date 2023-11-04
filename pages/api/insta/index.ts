@@ -19,7 +19,7 @@
    }
 
    async function handler(req, res) {
-     // Run the middleware
+
      await runMiddleware(req, res, cors);
 
      if (req.method === 'GET') {
