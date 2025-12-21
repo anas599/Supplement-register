@@ -1,31 +1,31 @@
-'use client';
-import SkeletonProductList from '@/app/component/Loading/skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
-import Image from 'next/image';
-import { useState, useEffect } from 'react';
-import AddCartBtnProp from './addCartBtnProp';
-import { motion } from 'framer-motion';
-import 'react-toastify/dist/ReactToastify.css';
+"use client";
+import SkeletonProductList from "@/app/component/Loading/skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import Image from "next/image";
+import { useState, useEffect } from "react";
+import AddCartBtnProp from "./addCartBtnProp";
+import { motion } from "framer-motion";
+import "react-toastify/dist/ReactToastify.css";
 
-import { toast, ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from "react-toastify";
 
 export default function ItemPick({ product, addToInvoice }: any) {
   const [inventory, setInventory] = useState(null);
   const [selected, setSelected] = useState(null);
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   function handleAddToInvoice(item: any) {
     addToInvoice(item);
   }
   function handelShowToast() {
-    toast.warn('Item is out of stock!', {
-      position: 'top-center',
+    toast.warn("Item is out of stock!", {
+      position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: 'dark',
+      theme: "dark",
     });
   }
   useEffect(() => {
@@ -38,10 +38,10 @@ export default function ItemPick({ product, addToInvoice }: any) {
           setInventory(data);
           setSelected(data[0]);
         } else {
-          console.error('Failed to fetch data');
+          console.error("Failed to fetch data");
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     }
 
@@ -53,14 +53,14 @@ export default function ItemPick({ product, addToInvoice }: any) {
   };
 
   const filteredItems =
-    query === ''
+    query === ""
       ? inventory
       : //@ts-ignore
         inventory.filter((item: any) =>
           item.name
             .toLowerCase()
-            .replace(/\s+/g, '')
-            .includes(query.toLowerCase().replace(/\s+/g, '')),
+            .replace(/\s+/g, "")
+            .includes(query.toLowerCase().replace(/\s+/g, ""))
         );
 
   if (inventory === null) {
@@ -102,23 +102,23 @@ export default function ItemPick({ product, addToInvoice }: any) {
             <div className="mb-2 flex flex-col items-center justify-between">
               <p>
                 <span className="text-l text-slate-900">
-                  {'Price: $' + item.price + ' '}
+                  {"Price: $" + item.price + " "}
                 </span>
               </p>
               <p>
                 <span className="text-l text-slate-900">
-                  {'Flavor: ' + item.flavor + ' '}
+                  {"Flavor: " + item.flavor + " "}
                 </span>
               </p>
               <p>
                 <span className="text-l text-slate-900">
-                  {'Size: ' + item.size}
+                  {"Size: " + item.size}
                 </span>
               </p>
             </div>
             <AddCartBtnProp
               onClick={() => handleAddToInvoice(item)}
-              text={'Add to Invoice'}
+              text={"Add to Invoice"}
             />
           </div>
         </motion.div>
@@ -163,17 +163,17 @@ export default function ItemPick({ product, addToInvoice }: any) {
             <div className="mb-2 flex flex-col items-center justify-between">
               <p>
                 <span className="text-l text-slate-900">
-                  {'Price: $' + item.price + ' '}
+                  {"Price: $" + item.price + " "}
                 </span>
               </p>
               <p>
                 <span className="text-l text-slate-900">
-                  {'Flavor: ' + item.flavor + ' '}
+                  {"Flavor: " + item.flavor + " "}
                 </span>
               </p>
               <p>
                 <span className="text-l text-slate-900">
-                  {'Size: ' + item.size}
+                  {"Size: " + item.size}
                 </span>
               </p>
             </div>
@@ -191,7 +191,7 @@ export default function ItemPick({ product, addToInvoice }: any) {
             />
             <AddCartBtnProp
               onClick={() => handelShowToast()}
-              text={<span style={{ color: 'red' }}>Out of Stock</span>}
+              text={<span style={{ color: "red" }}>Out of Stock</span>}
             />
           </div>
         </motion.div>
