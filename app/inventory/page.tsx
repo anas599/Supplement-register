@@ -21,7 +21,7 @@ const Inventory = () => {
         console.error('Error fetching data:', error);
       }
     }
-
+// test deploy
     fetchData();
   }, []);
   if (inventory === null) {
