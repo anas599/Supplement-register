@@ -1,7 +1,7 @@
-'use client';
-import { Fragment } from 'react';
-import { Disclosure, Menu, Transition } from '@headlessui/react';
-import Image from 'next/image';
+"use client";
+import { Fragment } from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import Image from "next/image";
 import {
   Bars3Icon,
   BellIcon,
@@ -14,25 +14,25 @@ import {
   ClipboardDocumentCheckIcon,
   CalendarDaysIcon,
   PlusCircleIcon,
-} from '@heroicons/react/24/outline';
-import formatDate from '../functions/formatDate';
+} from "@heroicons/react/24/outline";
+import formatDate from "../functions/formatDate";
 
 const navigation = [
-  { name: 'Sale', href: '/', current: true, icon: CurrencyDollarIcon },
-  { name: 'Return', href: '#', current: false, icon: ArrowLeftCircleIcon },
+  { name: "Sale", href: "/", current: true, icon: CurrencyDollarIcon },
+  { name: "Return", href: "#", current: false, icon: ArrowLeftCircleIcon },
   {
-    name: 'Inventory',
-    href: '/inventory',
+    name: "Inventory",
+    href: "/inventory",
     current: false,
     icon: ClipboardDocumentCheckIcon,
   },
-  { name: 'Start Day', href: '#', current: false, icon: PlayIcon },
-  { name: 'End Day', href: '#', current: false, icon: NoSymbolIcon },
-  { name: 'Today Sale', href: '#', current: false, icon: CalendarDaysIcon },
-  { name: 'Add Item', href: '/addItem', current: false, icon: PlusCircleIcon },
+  { name: "Start Day", href: "#", current: false, icon: PlayIcon },
+  { name: "End Day", href: "#", current: false, icon: NoSymbolIcon },
+  { name: "Today Sale", href: "#", current: false, icon: CalendarDaysIcon },
+  { name: "Add Item", href: "/addItem", current: false, icon: PlusCircleIcon },
 ];
 function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function NavBar() {
@@ -56,12 +56,12 @@ export default function NavBar() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <Image
-                    className="h-8 w-8 rounded-full"
+                  <img
                     src="/registerIcon1.png"
-                    alt=""
                     width={120}
                     height={120}
+                    alt="logo"
+                    className="h-8 w-8 rounded-full"
                   />
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
@@ -72,11 +72,11 @@ export default function NavBar() {
                           href={item.href}
                           className={classNames(
                             item.current
-                              ? 'bg-gray-900 text-white'
-                              : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                            'group flex items-center rounded-md px-3 py-2 text-sm font-medium',
+                              ? "bg-gray-900 text-white"
+                              : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                            "group flex items-center rounded-md px-3 py-2 text-sm font-medium"
                           )}
-                          aria-current={item.current ? 'page' : undefined}
+                          aria-current={item.current ? "page" : undefined}
                         >
                           <item.icon
                             className="h-6 w-6 mr-2 text-gray-300"
@@ -85,11 +85,11 @@ export default function NavBar() {
                           {item.name}
                         </a>
                       </div>
-                    ))}{' '}
+                    ))}{" "}
                   </div>
                 </div>
               </div>
-              {formatDate(new Date().toLocaleString() + '')}
+              {formatDate(new Date().toLocaleString() + "")}
 
               {/* <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
@@ -180,11 +180,11 @@ export default function NavBar() {
                   href={item.href}
                   className={classNames(
                     item.current
-                      ? 'bg-gray-900 text-white'
-                      : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block rounded-md px-3 py-2 text-base font-medium',
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    "block rounded-md px-3 py-2 text-base font-medium"
                   )}
-                  aria-current={item.current ? 'page' : undefined}
+                  aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}
                 </Disclosure.Button>
