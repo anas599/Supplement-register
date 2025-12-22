@@ -1,7 +1,10 @@
-import { format } from 'date-fns';
+import { format, isValid } from 'date-fns';
 
-function formatDate(date: string) {
-  const date1 = new Date(date);
-  return format(new Date(date), 'yyyy/MM/dd ');
+function formatDate(date: string | Date | number) {
+  const parsed = date instanceof Date ? date : new Date(date);
+  if (!isValid(parsed)) {
+    return '';
+  }
+  return format(parsed, 'yyyy/MM/dd ');
 }
 export default formatDate;

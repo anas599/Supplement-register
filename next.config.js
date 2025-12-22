@@ -31,6 +31,7 @@ const nextConfig = {
     BUCKET_NAME: process.env.BUCKET_NAME,
   },
   images: {
+    unoptimized: true,
     domains: [
       "olimpsport.com",
       "upload.wikimedia.org",
